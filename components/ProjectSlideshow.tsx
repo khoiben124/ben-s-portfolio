@@ -30,12 +30,12 @@ export default function ProjectSlideshow({ images }: { images: SlideImage[] }) {
   const current = images[index];
 
   return (
-    <div className="relative">
-      <div className="aspect-video bg-stone-950 rounded-lg overflow-hidden border border-stone-800 relative group">
+    <div>
+      <div className="aspect-video rounded-xl overflow-hidden relative group shadow-2xl shadow-black/50 ring-1 ring-stone-800">
         <img
           src={current.src}
           alt={current.caption}
-          className="w-full h-full object-contain"
+          className="absolute inset-0 w-full h-full object-cover"
         />
 
         {images.length > 1 && (
@@ -43,19 +43,19 @@ export default function ProjectSlideshow({ images }: { images: SlideImage[] }) {
             <button
               onClick={goPrev}
               aria-label="Previous image"
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-stone-950/80 hover:bg-orange-500 text-stone-100 hover:text-stone-950 transition-all opacity-70 group-hover:opacity-100"
+              className="absolute left-4 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full bg-stone-950/70 backdrop-blur-sm hover:bg-orange-500 text-stone-100 hover:text-stone-950 transition-all opacity-0 group-hover:opacity-100"
             >
               ←
             </button>
             <button
               onClick={goNext}
               aria-label="Next image"
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-stone-950/80 hover:bg-orange-500 text-stone-100 hover:text-stone-950 transition-all opacity-70 group-hover:opacity-100"
+              className="absolute right-4 top-1/2 -translate-y-1/2 w-11 h-11 flex items-center justify-center rounded-full bg-stone-950/70 backdrop-blur-sm hover:bg-orange-500 text-stone-100 hover:text-stone-950 transition-all opacity-0 group-hover:opacity-100"
             >
               →
             </button>
 
-            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5">
+            <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-1.5 bg-stone-950/60 backdrop-blur-sm px-3 py-2 rounded-full">
               {images.map((_, i) => (
                 <button
                   key={i}
@@ -64,7 +64,7 @@ export default function ProjectSlideshow({ images }: { images: SlideImage[] }) {
                   className={`h-2 rounded-full transition-all ${
                     i === index
                       ? "bg-orange-500 w-6"
-                      : "bg-stone-500 hover:bg-stone-300 w-2"
+                      : "bg-stone-400 hover:bg-stone-200 w-2"
                   }`}
                 />
               ))}
@@ -73,7 +73,7 @@ export default function ProjectSlideshow({ images }: { images: SlideImage[] }) {
         )}
       </div>
 
-      <p className="text-stone-500 text-sm text-center mt-3">
+      <p className="text-stone-500 text-sm text-center mt-4">
         {current.caption}
         {images.length > 1 && (
           <span className="text-stone-600 ml-2">

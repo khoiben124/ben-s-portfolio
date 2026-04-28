@@ -1,6 +1,7 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 
 const experiences = [
   {
@@ -8,7 +9,7 @@ const experiences = [
     org: "Human Active Technology — Manufacturing",
     period: "May 2026 — Present",
     bullets: [
-      "To be determined..."
+      "To be determined...",
     ],
   },
   {
@@ -42,47 +43,78 @@ const experiences = [
 ];
 
 export default function Experience() {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <div className="relative">
       <div className="absolute left-[7px] top-3 bottom-3 w-0.5 bg-gradient-to-b from-orange-500 via-stone-700 to-stone-800" />
 
-      <div className="space-y-12">
-        {experiences.map((exp, i) => (
-          <motion.div
-            key={exp.role}
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: i * 0.1 }}
-            className="relative pl-10"
-          >
-            <div className="absolute left-0 top-3 w-4 h-4 rounded-full bg-stone-950 border-2 border-orange-500 z-10" />
-            <div className="absolute left-[3px] top-[15px] w-2.5 h-2.5 rounded-full bg-orange-500 z-20" />
+      <div className="space-y-3">
+        {experiences.map((exp, i) => {
+          const isOpen = openIndex === i;
+          return (
+            <motion.div
+              key={exp.role}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.5, delay: i * 0.08 }}
+              className="relative pl-10"
+            >
+              <div className="absolute left-0 top-3 w-4 h-4 rounded-full bg-stone-950 border-2 border-orange-500 z-10" />
+              <div className="absolute left-[3px] top-[15px] w-2.5 h-2.5 rounded-full bg-orange-500 z-20" />
 
-            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 mb-1">
-              <h3 className="text-stone-100 text-xl md:text-2xl font-medium leading-snug">
-                {exp.role}
-              </h3>
-              <span className="text-stone-500 text-sm font-mono shrink-0">
-                {exp.period}
-              </span>
-            </div>
+              <button
+                onClick={() => setOpenIndex(isOpen ? null : i)}
+                aria-expanded={isOpen}
+                className="w-full text-left group py-1"
+              >
+                <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 mb-1">
+                  <h3 className="text-stone-100 text-xl md:text-2xl font-medium leading-snug group-hover:text-orange-500 transition-colors">
+                    {exp.role}
+                  </h3>
+                  <span className="text-stone-500 text-sm font-mono shrink-0">
+                    {exp.period}
+                  </span>
+                </div>
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-orange-500 text-base">{exp.org}</p>
+                  <span
+                    className={`text-stone-500 group-hover:text-orange-500 text-lg transition-all duration-300 shrink-0 ${
+                      isOpen ? "rotate-45" : ""
+                    }`}
+                  >
+                    +
+                  </span>
+                </div>
+              </button>
 
-            <p className="text-orange-500 text-base mb-4">{exp.org}</p>
-
-            <ul className="space-y-2.5">
-              {exp.bullets.map((bullet, j) => (
-                <li
-                  key={j}
-                  className="text-stone-300 text-base leading-relaxed pl-5 relative"
-                >
-                  <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-stone-500" />
-                  {bullet}
-                </li>
-              ))}
-            </ul>
-          </motion.div>
-        ))}
+              <AnimatePresence initial={false}>
+                {isOpen && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3 }}
+                    className="overflow-hidden"
+                  >
+                    <ul className="space-y-2.5 pt-4 pb-2">
+                      {exp.bullets.map((bullet, j) => (
+                        <li
+                          key={j}
+                          className="text-stone-300 text-base leading-relaxed pl-5 relative"
+                        >
+                          <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-stone-500" />
+                          {bullet}
+                        </li>
+                      ))}
+                    </ul>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );

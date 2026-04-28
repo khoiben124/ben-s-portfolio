@@ -1,7 +1,7 @@
 import { projects } from "@/data/projects";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import ProjectGallery from "@/components/ProjectGallery";
+import ProjectSlideshow from "@/components/ProjectSlideshow";
 
 export function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -19,7 +19,7 @@ export default async function ProjectPage({
 
   return (
     <main className="min-h-screen px-6 py-12">
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-4xl mx-auto">
         <Link
           href="/#projects"
           className="inline-flex items-center gap-2 text-stone-400 hover:text-orange-500 transition-colors mb-8 text-sm"
@@ -51,21 +51,19 @@ export default async function ProjectPage({
           ))}
         </div>
 
-        <div className="aspect-video bg-stone-900 rounded-lg overflow-hidden mb-12 border border-stone-800">
-          {project.inProgress ? (
+        {project.gallery.length > 0 ? (
+          <div className="mb-12 max-w-xl mx-auto">
+            <ProjectSlideshow images={project.gallery} />
+          </div>
+        ) : (
+          <div className="aspect-video bg-stone-900 rounded-lg overflow-hidden mb-12 border border-stone-800 max-w-xl mx-auto">
             <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-stone-900 to-stone-800 text-center p-6">
               <div className="text-orange-500 text-6xl mb-4">⚙</div>
               <p className="text-stone-200 text-xl font-medium mb-2">In Progress</p>
-              <p className="text-stone-400 text-sm">This project is actively being developed. Photos coming soon.</p>
+              <p className="text-stone-400 text-sm">Photos coming soon.</p>
             </div>
-          ) : (
-            <img
-              src={project.heroImage}
-              alt={project.title}
-              className="w-full h-full object-cover"
-            />
-          )}
-        </div>
+          </div>
+        )}
 
         <div className="grid md:grid-cols-3 gap-12 mb-12">
           <div className="md:col-span-2 space-y-5">
@@ -73,10 +71,7 @@ export default async function ProjectPage({
               Overview
             </h2>
             {project.longDescription.map((paragraph, i) => (
-              <p
-                key={i}
-                className="text-stone-300 leading-relaxed"
-              >
+              <p key={i} className="text-stone-300 leading-relaxed">
                 {paragraph}
               </p>
             ))}
@@ -96,15 +91,6 @@ export default async function ProjectPage({
             </ul>
           </div>
         </div>
-
-        {project.gallery.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-orange-500 text-sm uppercase tracking-wider mb-6">
-              Gallery
-            </h2>
-            <ProjectGallery images={project.gallery} />
-          </div>
-        )}
 
         <div className="border-t border-stone-800 pt-8 text-center">
           <Link
