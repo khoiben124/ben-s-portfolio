@@ -9,13 +9,30 @@ export interface Project {
   heroImage: string;
   gallery: { src: string; caption: string }[];
   highlights: string[];
-  inProgress?: boolean;
 }
 
-// Projects are listed newest first.
-// To change a project's main card image, set heroImage to any path from its gallery
-// (or to a different image you've placed in public/projects/<slug>/).
-// To reorder gallery images (which controls slideshow order), reorder the gallery array.
+// ============================================================
+// HOW TO EDIT THIS FILE
+// ============================================================
+// Each project is a block { ... } in the array below.
+// Projects appear on your site in the order listed here (top = first).
+//
+// To CHANGE A PROJECT'S MAIN CARD IMAGE:
+//   Edit the `heroImage` field for that project.
+//   Example: heroImage: "/projects/voron/2.jpg"
+//
+// To REORDER SLIDESHOW IMAGES (or add/remove):
+//   Edit the `gallery` array. The first item shows first.
+//   Each entry: { src: "/path/to/image.jpg", caption: "what it shows" }
+//
+// To REORDER PROJECTS on the home page:
+//   Cut a project's { ... } block and paste it elsewhere in the array.
+//
+// To ADD A NEW PROJECT:
+//   Copy any existing { ... } block, paste it where you want it,
+//   change all fields, drop new images in public/projects/<slug>/
+// ============================================================
+
 export const projects: Project[] = [
   {
     slug: "plasma-cutter",

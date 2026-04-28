@@ -1,17 +1,14 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { motion } from "framer-motion";
 
 const experiences = [
   {
-    role: "Driver Control System (Pedal Box)",
-    org: "Formula SAE — Villanova University",
-    period: "Jan 2026 — Present",
+    role: "Mechanical Engineering Internship",
+    org: "Human Active Technology — Manufacturing",
+    period: "May 2026 — Present",
     bullets: [
-      "Designing the VU18 car's pedal box in SolidWorks with focus on packaging and adjustability.",
-      "Manufacturing pedal box parts, steering wheel components, and 3D-printed molds for composite layups using milling, lathing, and additive manufacturing.",
-      "Designed a pedal-box return spring system; used MATLAB to calculate minimum force and deflection for 20 degree pedal travel; built a BOM from off-the-shelf components.",
+      "To be determined..."
     ],
   },
   {
@@ -45,74 +42,48 @@ const experiences = [
 ];
 
 export default function Experience() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0);
-
   return (
-    <div className="space-y-3">
-      {experiences.map((exp, i) => {
-        const isOpen = openIndex === i;
-        return (
+    <div className="relative">
+      <div className="absolute left-[7px] top-3 bottom-3 w-0.5 bg-gradient-to-b from-orange-500 via-stone-700 to-stone-800" />
+
+      <div className="space-y-12">
+        {experiences.map((exp, i) => (
           <motion.div
             key={exp.role}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: i * 0.08 }}
-            className={`bg-stone-900 border rounded-lg overflow-hidden transition-colors ${
-              isOpen ? "border-orange-500/50" : "border-stone-800 hover:border-stone-700"
-            }`}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            className="relative pl-10"
           >
-            <button
-              onClick={() => setOpenIndex(isOpen ? null : i)}
-              className="w-full p-5 flex items-center justify-between gap-4 text-left"
-              aria-expanded={isOpen}
-            >
-              <div className="flex-1 min-w-0">
-                <h3 className="text-stone-100 text-base md:text-lg font-medium">
-                  {exp.role}
-                </h3>
-                <p className="text-stone-500 text-sm font-mono mt-1">
-                  {exp.period}
-                </p>
-              </div>
-              <span
-                className={`text-orange-500 text-xl transition-transform duration-300 flex-shrink-0 ${
-                  isOpen ? "rotate-45" : ""
-                }`}
-              >
-                +
-              </span>
-            </button>
+            <div className="absolute left-0 top-3 w-4 h-4 rounded-full bg-stone-950 border-2 border-orange-500 z-10" />
+            <div className="absolute left-[3px] top-[15px] w-2.5 h-2.5 rounded-full bg-orange-500 z-20" />
 
-            <AnimatePresence initial={false}>
-              {isOpen && (
-                <motion.div
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: "auto", opacity: 1 }}
-                  exit={{ height: 0, opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
+            <div className="flex flex-col md:flex-row md:items-baseline md:justify-between gap-1 mb-1">
+              <h3 className="text-stone-100 text-xl md:text-2xl font-medium leading-snug">
+                {exp.role}
+              </h3>
+              <span className="text-stone-500 text-sm font-mono shrink-0">
+                {exp.period}
+              </span>
+            </div>
+
+            <p className="text-orange-500 text-base mb-4">{exp.org}</p>
+
+            <ul className="space-y-2.5">
+              {exp.bullets.map((bullet, j) => (
+                <li
+                  key={j}
+                  className="text-stone-300 text-base leading-relaxed pl-5 relative"
                 >
-                  <div className="px-5 pb-5 pt-1">
-                    <p className="text-orange-500 text-sm mb-4">{exp.org}</p>
-                    <ul className="space-y-2">
-                      {exp.bullets.map((bullet, j) => (
-                        <li
-                          key={j}
-                          className="text-stone-400 text-sm leading-relaxed pl-4 relative"
-                        >
-                          <span className="absolute left-0 text-stone-600">—</span>
-                          {bullet}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                  <span className="absolute left-0 top-2 w-1.5 h-1.5 rounded-full bg-stone-500" />
+                  {bullet}
+                </li>
+              ))}
+            </ul>
           </motion.div>
-        );
-      })}
+        ))}
+      </div>
     </div>
   );
 }

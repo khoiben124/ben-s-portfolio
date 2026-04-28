@@ -1,48 +1,106 @@
-import Navbar from "@/components/Navbar";
-import Hero from "@/components/Hero";
-import Section from "@/components/Section";
-import About from "@/components/About";
-import Experience from "@/components/Experience";
-import Skills from "@/components/Skills";
-import Education from "@/components/Education";
-import Contact from "@/components/Contact";
-import Projects from "@/components/Projects";
+import { projects } from "@/data/projects";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import ProjectSlideshow from "@/components/ProjectSlideshow";
 
-export default function Home() {
+export function generateStaticParams() {
+  return projects.map((p) => ({ slug: p.slug }));
+}
+
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
+  const project = projects.find((p) => p.slug === slug);
+
+  if (!project) notFound();
+
   return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
+    <main className="min-h-screen px-6 py-12">
+      <div className="max-w-4xl mx-auto">
+        <Link
+          href="/#projects"
+          className="inline-flex items-center gap-2 text-stone-400 hover:text-orange-500 transition-colors mb-8 text-sm"
+        >
+          <span>←</span> Back to all projects
+        </Link>
 
-        <Section id="about" label="01" title="About">
-          <About />
-        </Section>
+        <p className="text-stone-500 text-sm font-mono mb-3">
+          {project.period}
+          {project.role ? ` · ${project.role}` : ""}
+        </p>
 
-        <Section id="experience" label="02" title="Experience">
-          <Experience />
-        </Section>
+        <h1 className="font-serif text-4xl md:text-5xl text-stone-100 mb-4 leading-tight">
+          {project.title}
+        </h1>
 
-        <Section id="projects" label="03" title="Projects">
-          <Projects />
-        </Section>
+        <p className="text-stone-300 text-lg leading-relaxed mb-8 max-w-3xl">
+          {project.shortDescription}
+        </p>
 
-        <Section id="skills" label="04" title="Skills">
-          <Skills />
-        </Section>
+        <div className="flex flex-wrap gap-2 mb-12">
+          {project.tags.map((tag) => (
+            <span
+              key={tag}
+              className="text-sm text-stone-300 bg-stone-800 px-3 py-1 rounded-md"
+            >
+              {tag}
+            </span>
+          ))}
+        </div>
 
-        <Section id="education" label="05" title="Education">
-          <Education />
-        </Section>
+        {project.gallery.length > 0 ? (
+          <div className="mb-12 max-w-xl mx-auto">
+            <ProjectSlideshow images={project.gallery} />
+          </div>
+        ) : (
+          <div className="aspect-video bg-stone-900 rounded-lg overflow-hidden mb-12 border border-stone-800 max-w-xl mx-auto">
+            <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-stone-900 to-stone-800 text-center p-6">
+              <div className="text-orange-500 text-6xl mb-4">⚙</div>
+              <p className="text-stone-200 text-xl font-medium mb-2">In Progress</p>
+              <p className="text-stone-400 text-sm">Photos coming soon.</p>
+            </div>
+          </div>
+        )}
 
-        <Section id="contact" label="06" title="Contact">
-          <Contact />
-        </Section>
+        <div className="grid md:grid-cols-3 gap-12 mb-12">
+          <div className="md:col-span-2 space-y-5">
+            <h2 className="text-orange-500 text-sm uppercase tracking-wider mb-4">
+              Overview
+            </h2>
+            {project.longDescription.map((paragraph, i) => (
+              <p key={i} className="text-stone-300 leading-relaxed">
+                {paragraph}
+              </p>
+            ))}
+          </div>
 
-        <footer className="border-t border-stone-800 py-8 text-center text-sm text-stone-500">
-          Built with Next.js, Tailwind, and a lot of caffeine.
-        </footer>
-      </main>
-    </>
+          <div>
+            <h2 className="text-orange-500 text-sm uppercase tracking-wider mb-4">
+              Highlights
+            </h2>
+            <ul className="space-y-3">
+              {project.highlights.map((h) => (
+                <li key={h} className="text-stone-300 text-sm flex gap-2">
+                  <span className="text-orange-500 mt-0.5">▸</span>
+                  <span>{h}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="border-t border-stone-800 pt-8 text-center">
+          <Link
+            href="/#projects"
+            className="inline-block px-6 py-3 border border-stone-700 hover:border-stone-100 text-stone-100 font-medium rounded-md transition-colors"
+          >
+            ← Back to all projects
+          </Link>
+        </div>
+      </div>
+    </main>
   );
 }

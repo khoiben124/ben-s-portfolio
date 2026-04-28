@@ -18,7 +18,6 @@ export default function ProjectSlideshow({ images }: { images: SlideImage[] }) {
     setIndex((i) => (i === images.length - 1 ? 0 : i + 1));
   }, [images.length]);
 
-  // Keyboard arrow navigation
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") goPrev();
@@ -32,11 +31,11 @@ export default function ProjectSlideshow({ images }: { images: SlideImage[] }) {
 
   return (
     <div className="relative">
-      <div className="aspect-video bg-stone-900 rounded-lg overflow-hidden border border-stone-800 relative group">
+      <div className="aspect-video bg-stone-950 rounded-lg overflow-hidden border border-stone-800 relative group">
         <img
           src={current.src}
           alt={current.caption}
-          className="w-full h-full object-contain bg-stone-950"
+          className="w-full h-full object-contain"
         />
 
         {images.length > 1 && (
@@ -44,14 +43,14 @@ export default function ProjectSlideshow({ images }: { images: SlideImage[] }) {
             <button
               onClick={goPrev}
               aria-label="Previous image"
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-stone-950/70 hover:bg-orange-500 text-stone-100 hover:text-stone-950 transition-all opacity-0 group-hover:opacity-100"
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-stone-950/80 hover:bg-orange-500 text-stone-100 hover:text-stone-950 transition-all opacity-70 group-hover:opacity-100"
             >
               ←
             </button>
             <button
               onClick={goNext}
               aria-label="Next image"
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-stone-950/70 hover:bg-orange-500 text-stone-100 hover:text-stone-950 transition-all opacity-0 group-hover:opacity-100"
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center rounded-full bg-stone-950/80 hover:bg-orange-500 text-stone-100 hover:text-stone-950 transition-all opacity-70 group-hover:opacity-100"
             >
               →
             </button>
@@ -62,10 +61,10 @@ export default function ProjectSlideshow({ images }: { images: SlideImage[] }) {
                   key={i}
                   onClick={() => setIndex(i)}
                   aria-label={`Go to slide ${i + 1}`}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 rounded-full transition-all ${
                     i === index
                       ? "bg-orange-500 w-6"
-                      : "bg-stone-500 hover:bg-stone-300"
+                      : "bg-stone-500 hover:bg-stone-300 w-2"
                   }`}
                 />
               ))}
