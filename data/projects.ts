@@ -41,14 +41,14 @@ export const projects: Project[] = [
       "A low-cost CNC plasma cutter built from 3D-printed and off-the-shelf components to fabricate sheet metal parts for Formula SAE.",
     longDescription: [
       "Helped build and troubleshoot a low-cost CNC plasma cutter to fabricate custom tabs, brackets, and sheet metal parts for the Formula SAE team. The motivation was simple: outsourcing every sheet metal part is slow and expensive, and a plasma cutter pays for itself quickly when you have an active build season.",
-      "The frame and motion system used 3D-printed components combined with off-the-shelf rails, an OpenBuilds controller, and standard plasma cutter hardware. I helped with wiring, the initial troubleshooting pass, and tuning Fusion 360 CAM toolpaths for clean, reliable cuts.",
+      "The frame and motion system used 3D-printed components combined with off-the-shelf rails/motors, an OpenBuilds controller, and standard plasma cutter hardware. I helped with wiring, the initial troubleshooting pass, and tuning Fusion 360 CAM toolpaths for clean, reliable cuts.",
     ],
     tags: ["Fusion 360 CAM", "OpenBuilds", "3D Printing", "Electronics", "Plasma Cutting"],
     period: "March 2026",
     role: "Build & Tuning Support",
     heroImage: "/projects/plasma-cutter/1.jpg",
     gallery: [
-      { src: "/projects/plasma-cutter/1.jpg", caption: "Plasma cutter in operation" },
+      { src: "/projects/plasma-cutter/1.jpg", caption: "Plasma cutter" },
     ],
     highlights: [
       "3D-printed gantry components",
@@ -73,8 +73,8 @@ export const projects: Project[] = [
     role: "Driver Control System",
     heroImage: "/projects/fsae/1.jpg",
     gallery: [
-      { src: "/projects/fsae/1.jpg", caption: "Pedal box design" },
-      { src: "/projects/fsae/2.jpg", caption: "Manufacturing components" },
+      { src: "/projects/fsae/1.jpg", caption: "Pedal box back" },
+      { src: "/projects/fsae/2.jpg", caption: "Pedal box front" },
     ],
     highlights: [
       "MATLAB-validated return spring design",
@@ -90,7 +90,7 @@ export const projects: Project[] = [
       "A custom small-scale tensile-testing rig with Python control software, designed to enable repeatable hydrogen-embrittlement studies on steel.",
     longDescription: [
       "As an Undergraduate Researcher in the 3D Lab at Villanova, I designed and built a benchtop tensile-testing stage from scratch. The goal was to give researchers a flexible, low-cost platform for small-scale mechanical tests.",
-      "The system integrates a TMC2209 stepper driver for precise motion, an ADS1115 16-bit ADC for clean load-cell readings, and a load cell system that achieves better than 0.03 N resolution. Eight custom mechanical components were designed in SolidWorks and machined or 3D-printed in-house.",
+      "The system integrates a TMC2209 stepper driver for precise motion, an ADS1115 16-bit ADC for clean load-cell readings, and a load cell system that achieves better than 0.25 N resolution. Eight custom mechanical components were designed in SolidWorks and machined or 3D-printed in-house.",
       "I wrote the control software in Python. It handles motion control, data acquisition, and real-time CSV export of time, displacement, load, and step count. Researchers can configure speed, target force, and termination conditions before each run.",
       "The end goal is a repeatable hydrogen-embrittlement testing workflow for steel. With consistent automated tensile data, we can characterize how hydrogen exposure changes material behavior under load.",
     ],
@@ -99,12 +99,12 @@ export const projects: Project[] = [
     role: "Undergraduate Researcher",
     heroImage: "/projects/tensile-stage/1.png",
     gallery: [
-      { src: "/projects/tensile-stage/1.png", caption: "CAD model" },
-      { src: "/projects/tensile-stage/2.jpg", caption: "Mid-assembly" },
-      { src: "/projects/tensile-stage/3.jpg", caption: "Running a test" },
+      { src: "/projects/tensile-stage/1.png", caption: "Hydrogen Charging" },
+      { src: "/projects/tensile-stage/2.jpg", caption: "CAD" },
+      { src: "/projects/tensile-stage/3.jpg", caption: "Final Test setup" },
     ],
     highlights: [
-      "0.03 N load resolution",
+      "0.25 N load resolution",
       "8 custom-designed mechanical components",
       "Real-time CSV data export",
       "Python-based test automation",
@@ -117,18 +117,18 @@ export const projects: Project[] = [
       "A low-cost computational fluid dynamics tool using machine learning and computer vision to visualize airflow over airfoils, built during the L3Harris INNOVATE summer program.",
     longDescription: [
       "I led a team of four engineers to develop AeroVision during Villanova's INNOVATE summer program, sponsored by L3Harris. The objective was to make airflow visualization accessible without expensive CFD licenses.",
-      "On the hardware side, I 3D modeled and built a motorized wind tunnel positioning system in SolidWorks, allowing us to systematically vary airfoil angle of attack and capture imagery at consistent positions.",
-      "We ran over 100 flow visualization tests in Villanova's closed-return wind tunnel using smoke-line techniques to generate a labeled dataset. The ML and CV pipeline learned to predict airflow patterns from airfoil geometry and angle, giving a near-instant approximate CFD result without simulation overhead.",
+      "On the hardware side, I 3D modeled and built a motorized wind tunnel positioning system in SolidWorks, allowing us to systematically vary airfoil angle of attack and freely position a string tied to a rod for image capturing.",
+      "We ran over 100 flow visualization tests in Villanova's closed-return wind tunnel using smoke-line techniques to generate a labeled dataset. The ML and CV pipeline learned to predict airflow patterns from airfoil geometry and angle, giving a quick approximate CFD result.",
     ],
     tags: ["Machine Learning", "Computer Vision", "SolidWorks", "Wind Tunnel", "Python"],
     period: "June 2025 — July 2025",
     role: "Mechanical Engineering Lead",
     heroImage: "/projects/aerovision/1.png",
     gallery: [
-      { src: "/projects/aerovision/1.png", caption: "AeroVision system" },
-      { src: "/projects/aerovision/2.png", caption: "Wind tunnel testing" },
-      { src: "/projects/aerovision/3.png", caption: "Flow visualization" },
-      { src: "/projects/aerovision/4.png", caption: "Data analysis" },
+      { src: "/projects/aerovision/1.png", caption: "Generated image" },
+      { src: "/projects/aerovision/2.png", caption: "CAD" },
+      { src: "/projects/aerovision/3.png", caption: "Electronics" },
+      { src: "/projects/aerovision/4.png", caption: "Testing data" },
     ],
     highlights: [
       "Led a team of 4 engineers",
@@ -152,9 +152,9 @@ export const projects: Project[] = [
     role: "Independent Build",
     heroImage: "/projects/voron/1.jpg",
     gallery: [
-      { src: "/projects/voron/1.jpg", caption: "Frame assembly" },
-      { src: "/projects/voron/2.jpg", caption: "Wiring and electronics" },
-      { src: "/projects/voron/3.png", caption: "First successful print" },
+      { src: "/projects/voron/1.jpg", caption: "Voron 2.4" },
+      { src: "/projects/voron/2.jpg", caption: "Voron 0.2" },
+      { src: "/projects/voron/3.png", caption: "Web interface" },
     ],
     highlights: [
       "Two complete Voron builds (2.4 and 0.2)",

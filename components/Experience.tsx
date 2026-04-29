@@ -18,7 +18,7 @@ const experiences = [
     period: "Aug 2025 — Present",
     bullets: [
       "Designed and built a benchtop tensile-testing stage with 8 custom components, integrating a TMC2209 stepper driver, ADS1115 ADC, and load cell system.",
-      "Wrote Python control software to automate testing and export real-time time, displacement, load (within 0.03 N), and step-count data to CSV.",
+      "Wrote Python control software to automate testing and export real-time time, displacement, load (within 0.25 N), and step-count data to CSV.",
       "Developing a repeatable hydrogen-embrittlement testing workflow for steel to enable reliable material behavior and crack characterization.",
     ],
   },
